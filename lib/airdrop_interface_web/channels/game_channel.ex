@@ -2,11 +2,15 @@ defmodule AirdropInterfaceWeb.GameChannel do
   use AirdropInterfaceWeb, :channel
 
   alias AirdropEngine.{Game, GameSupervisor}
-  alias AirdropInterface.Presence
+  alias AirdropInterfaceWeb.Presence
 
   def join("game:" <> _player, %{"screen_name" => screen_name}, socket) do
-    send(self(), {:after_join, screen_name})
-    {:ok, socket}
+    if authorized?(socket, screen_name) do
+      send(self(), {:after_join, screen_name})
+      {:ok, socket}
+    else
+      {:error, %{reason: "unauthorized"}}
+    end
   end
 
   def handle_in("new_game", _payload, socket) do
@@ -79,4 +83,13 @@ defmodule AirdropInterfaceWeb.GameChannel do
   end
 
   def via("game:" <> player), do: Game.via_tuple(player)
+
+  defp authorized?(socket, screen_name), do:
+    number_of_players(socket) < 2 && !existing_player?(socket, screen_name)
+
+  defp existing_player?(socket, screen_name), do:
+    socket |> Presence.list() |> Map.has_key?(screen_name)
+
+  defp number_of_players(socket), do:
+    socket |> Presence.list() |> Map.keys() |> length()
 end
