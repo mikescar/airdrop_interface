@@ -2,7 +2,7 @@ defmodule AirdropInterfaceWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", AirdropInterfaceWeb.RoomChannel
+  channel "game:*", AirdropInterfaceWeb.GameChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

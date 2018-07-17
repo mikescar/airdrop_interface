@@ -23,8 +23,6 @@ defmodule AirdropInterface.Mixfile do
     ]
   end
 
-  def applications(:dev), do: applications(:all) ++ [:remix]
-
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_),     do: ["lib"]
@@ -40,8 +38,7 @@ defmodule AirdropInterface.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
-      {:airdrop_engine, path: "../airdrop_engine"},
-      {:remix, "~> 0.0.1", only: :dev}
+      {:airdrop_engine, path: "../airdrop_engine"}
     ]
   end
 end
