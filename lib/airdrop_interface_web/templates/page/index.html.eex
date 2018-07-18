@@ -1,14 +1,2 @@
-<div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}", name: __MODULE__ %></h2>
-  <p class="lead">
-    Some shiz
-  </p>
-  <p>
-    <%= form_tag("/test") do
-      [
-        tag(:input, type: "text", name: "name"),
-        tag(:input, type: "submit", value: "New Game")
-      ]
-    end%>
-  </p>
+<div id="islands">
 </div>
