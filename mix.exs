@@ -38,7 +38,7 @@ defmodule AirdropInterface.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
-      {:airdrop_engine, path: "../airdrop_engine"}
+      {:airdrop_engine, git: "https://github.com/mikescar/airdrop_engine.git"}
     ]
   end
 end
